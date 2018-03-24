@@ -1,0 +1,192 @@
+$border: 3px solid pink;
+
+body {
+  text-align: center;
+  overflow: hidden;
+  color: pink;
+  font-family: "Reenie Beanie";
+  font-size: 4rem;
+}
+
+div  {
+  display: block;
+}
+
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: -100px;
+}
+
+$mailboxHeight: 92px;
+
+.mailbox {
+  top: -40px;
+  border: $border;
+  border-radius: 40px 40px 0 0;
+  width: 200px;
+  height: $mailboxHeight;
+  position: relative;
+  &::after, &::before {
+    content: ' ';
+    width: 0px;
+    height: 0px;
+    border: $border;
+    position: absolute;
+    top: 15px;
+    border-radius: 50%;
+  }
+  &::before {
+    left: 100px;
+  }
+  &::after {
+    left: 160px;
+  }
+  .receptacle {
+    position: absolute;
+    left: 0;
+    top: -3px;
+    border: $border;
+    border-left: none;
+    border-bottom: none;
+    border-radius: inherit;
+    height: $mailboxHeight;
+    width: 70px;
+    background-color: lighten(pink, 5%);
+    z-index: -10;
+  }
+  .flag {
+    position: absolute;
+    top: 47px;
+    left: 100px;
+    border: $border;
+    width: 50px;
+    height: 0px;
+    border-radius: 3px;
+    transform-origin: 2px 2px;
+    animation: 8s linear bounce infinite;
+    &::after {
+      content: ' ';
+      background-color: pink;
+      width: 14px;
+      height: 18px;
+      border-radius: 2px;
+      position: absolute;
+      left: 47px;
+      top: -15px;
+    }
+  }
+  $doorSkew: -30deg;
+  .door, .door-back {
+    z-index: 100;
+    border: $border;
+    position: absolute;
+    left: -3px;
+    top: $mailboxHeight;
+    
+    border-radius: 0 0 35px 35px;
+    
+    width: 70px;
+    height: $mailboxHeight * 0.75;
+    
+    background-color: lighten(pink, 10%);
+    
+    transform-origin: top right;
+    transform: skew($doorSkew);
+  }
+  .door-back {
+    background-color: lighten(pink, 12%);
+    height: $mailboxHeight * 0.78;
+    width:76px;
+    top: $mailboxHeight + 3px;
+    left: 0px;
+    z-index: -10;
+  }
+  .door .hinge {
+    transform: skew(-1 * $doorSkew);
+    border: $border;
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    top: -9px;
+    right: -14px;
+    border-radius: 50%;
+    background-color: white;
+  }
+  .post {
+    position: absolute;
+    border: $border;
+    top: $mailboxHeight;
+    left: 100px;
+    width: 20px;
+    height: 150px;
+    background-color: lighten(pink, 5%);
+    &::after {
+      all: inherit;
+      content: ' ';
+      width: 10px;
+      left: 20px;
+      top: -3px;
+      background-color: lighten(pink, 8%);
+    }
+  }
+  .ground {
+    position: absolute;
+    top: $mailboxHeight + 140px;
+    left: 87px;
+    width: 20px;
+    height: 20px;
+    border: $border;
+    background-color: lighten(pink, 8%);
+    border-radius: 5px;
+    border-bottom: none;
+    border-right: none;
+    transform: rotate(45deg);
+    &::after, &::before {
+      content: ' ';
+      all: inherit;
+      transform: none;
+    }
+    &::after {
+      top: -10px;
+      left: 10px;
+    }
+    &::before {
+      z-index: 100;
+      top: -25px;
+      left: 25px;
+    }
+  }
+  .shadows {
+    position: absolute;
+    width: 120px;
+    height: 40px;
+    top: $mailboxHeight + 135px;
+    left: 60px;
+    background-color: lighten(pink, 8%);
+    border-radius: 50%;
+    z-index: -100;
+    filter: blur(6px);
+  }
+}
+
+@keyframes bounce {
+  0%   { transform: rotate(0deg); }
+  10%  { transform: rotate(0deg); }
+  11%  { transform: rotate(-8deg); }
+  12%  { transform: rotate(0deg); }
+  13%  { transform: rotate(-3deg); }
+  14%  { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@media (max-width: 500px) {
+  body {
+    font-size: 3rem;
+  }
+}
